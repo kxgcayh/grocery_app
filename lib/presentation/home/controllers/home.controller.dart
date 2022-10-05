@@ -20,6 +20,70 @@ class HomeController extends GetxController {
     (index) => 'Category-$index',
   ).toList().obs;
 
+  final RxList<String> category =
+      ['Coffee', 'Restaurant', 'Clinic', 'Beauty', 'Hobbys'].obs;
+
+  final RxList<ProductModel> products = [
+    ProductModel(
+      name: 'Denim Jeans Premium',
+      price: '150.000',
+      sold: 0,
+      rating: 4.5,
+      location: 'Indonesia, Jawa Barat',
+      whitelist: true,
+    ),
+    ProductModel(
+      name: 'Denim Jeans Premium',
+      price: '150.000',
+      sold: 128,
+      location: 'Indonesia, Jawa Barat',
+      whitelist: false,
+    ),
+    ProductModel(
+      name: 'Denim Jeans Premium',
+      price: '150.000',
+      sold: 0,
+      rating: 4.5,
+      location: 'Indonesia, Jawa Barat',
+      whitelist: false,
+    ),
+    ProductModel(
+      name: 'Denim Jeans Premium',
+      price: '150.000',
+      sold: 0,
+      rating: 4.5,
+      location: 'Indonesia, Jawa Barat',
+      whitelist: true,
+    ),
+  ].obs;
+
+  final RxList<FoodModel> Foods = [
+    FoodModel(
+      title: 'Adobong Manok sa Ganta',
+      subtitle: 'Main Dish',
+      estimate: 2.3,
+      review: 0,
+    ),
+    FoodModel(
+      title: 'Adobong Manok sa Ganta',
+      subtitle: 'Main Dish',
+      estimate: 2.3,
+      review: 0,
+    ),
+    FoodModel(
+      title: 'Adobong Manok sa Ganta',
+      subtitle: 'Main Dish',
+      estimate: 2.3,
+      review: 0,
+    ),
+    FoodModel(
+      title: 'Adobong Manok sa Ganta',
+      subtitle: 'Main Dish',
+      estimate: 2.3,
+      review: 0,
+    ),
+  ].obs;
+
   @override
   void onInit() {
     carouselController = CarouselController().obs;
@@ -38,4 +102,36 @@ class HomeController extends GetxController {
 
   @override
   void onClose() {}
+}
+
+class ProductModel {
+  const ProductModel({
+    required this.name,
+    required this.price,
+    this.discount,
+    required this.sold,
+    this.whitelist = false,
+    required this.location,
+    this.rating = 0.0,
+  });
+  final String name;
+  final String price;
+  final String? discount;
+  final int sold;
+  final bool whitelist;
+  final String location;
+  final double rating;
+}
+
+class FoodModel {
+  const FoodModel({
+    required this.title,
+    required this.subtitle,
+    required this.estimate,
+    required this.review,
+  });
+  final String title;
+  final String subtitle;
+  final double estimate;
+  final int review;
 }
