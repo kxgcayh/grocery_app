@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -156,11 +158,11 @@ class HomeScreen extends GetView<HomeController> {
                                     BorderRadius.all(Radius.circular(5.0)),
                                 child: Stack(
                                   children: <Widget>[
-                                    // Image.network(
-                                    //   item,
-                                    //   fit: BoxFit.fill,
-                                    //   width: 1000.0,
-                                    // ),
+                                    Image.network(
+                                      item,
+                                      fit: BoxFit.fill,
+                                      width: 1000.0,
+                                    ),
                                     Positioned(
                                       bottom: 0.0,
                                       left: 0.0,
@@ -626,8 +628,280 @@ class HomeScreen extends GetView<HomeController> {
                   }).toList(),
                 )
               ],
-            )
+            ),
             // End Featured
+            SizedBox(height: 20),
+            // Slider
+            Container(
+              color: Colors.green.withOpacity(0.2),
+              child: Column(
+                children: [
+                  CarouselSlider(
+                    carouselController: xctrl.carouselController.value,
+                    options: CarouselOptions(
+                      onPageChanged: (index, reason) {
+                        // xctrl.carouselIndicatorController.value.jumpTo(
+                        //   index.toDouble(),
+                        // );
+                        // xctrl.carouselIndicatorController.value.jumpToPage(index);
+                      },
+                      aspectRatio: 2.0,
+                      enlargeCenterPage: true,
+                      scrollDirection: Axis.horizontal,
+                      autoPlay: true,
+                    ),
+                    items: controller.imgList
+                        .map(
+                          (item) => Container(
+                            // margin: EdgeInsets.all(5.0),
+                            // child: ClipRRect(
+                            //   borderRadius:
+                            //       BorderRadius.all(Radius.circular(5.0)),
+                            //   child: Stack(
+                            //     children: [
+                            //       Image.network(
+                            //         item,
+                            //         fit: BoxFit.fill,
+                            //         width: 1000.0,
+                            //       ),
+                            //       Positioned(
+                            //         bottom: 0.0,
+                            //         left: 0.0,
+                            //         right: 0.0,
+                            //         child: Container(
+                            //           decoration: BoxDecoration(
+                            //             gradient: LinearGradient(
+                            //               colors: [
+                            //                 Color.fromARGB(200, 0, 0, 0),
+                            //                 Color.fromARGB(0, 0, 0, 0)
+                            //               ],
+                            //               begin: Alignment.bottomCenter,
+                            //               end: Alignment.topCenter,
+                            //             ),
+                            //           ),
+                            //           padding: EdgeInsets.symmetric(
+                            //             vertical: 10.0,
+                            //             horizontal: 20.0,
+                            //           ),
+                            //           child: Text(
+                            //             'No. ${controller.imgList.indexOf(item)} image',
+                            //             style: TextStyle(
+                            //               color: Colors.white,
+                            //               fontSize: 20.0,
+                            //               fontWeight: FontWeight.bold,
+                            //             ),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
+                            decoration: BoxDecoration(
+                              border: Border.all(),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child:
+                                LayoutBuilder(builder: (context, constraints) {
+                              return Row(
+                                children: [
+                                  Container(
+                                    height: double.infinity,
+                                    width: constraints.maxWidth / 2,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        bottomLeft: Radius.circular(10),
+                                      ),
+                                      color: Colors.green,
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                        left: 30,
+                                        right: 20,
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text('Title'),
+                                          SizedBox(height: 10),
+                                          Text('Description'),
+                                          SizedBox(height: 10),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.white),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                            ),
+                                            child: ElevatedButton(
+                                              onPressed: () {},
+                                              child: Text('Detail'),
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 20,
+                                                  vertical: 15,
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: Colors.blue,
+                                      borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(10),
+                                        bottomRight: Radius.circular(10),
+                                      ),
+                                    ),
+                                    width: constraints.maxWidth / 2,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(10),
+                                        bottomRight: Radius.circular(10),
+                                      ),
+                                      child: Image.network(
+                                        'https://picsum.photos/300/300',
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            }),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                  SmoothPageIndicator(
+                    controller: xctrl.carouselIndicatorController.value,
+                    count: xctrl.imgList.length,
+                    onDotClicked: (index) {
+                      print(index);
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        if (xctrl
+                            .carouselIndicatorController.value.hasClients) {
+                          // xctrl.carouselIndicatorController.value.jumpToPage(index);
+                          // xctrl.carouselIndicatorController.value.animateToPage(
+                          //   index,
+                          //   duration: Duration(milliseconds: 1),
+                          //   curve: Curves.easeInOut,
+                          // );
+                          xctrl.carouselIndicatorController.value.jumpTo(50.0);
+                        } else {
+                          print('failed');
+                        }
+                      });
+                    },
+                    effect: WormEffect(
+                      dotHeight: 16,
+                      dotWidth: 16,
+                      type: WormType.thin,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // End Slider
+
+            SizedBox(height: 20),
+
+            // Breakfast
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Container(
+                  child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Breakfast',
+                        style: TextStyle(fontWeight: FontWeight.w700),
+                      ),
+                      TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'View All',
+                          style: TextStyle(color: Colors.green.shade500),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    'Breakfast is widely acknowledged to be the most important meal of the day',
+                    style: TextStyle(color: Colors.grey.shade500),
+                  ),
+                  SizedBox(height: 5),
+                  Row(
+                    children: [
+                      Stack(
+                        children: [
+                          Container(
+                            width: 300,
+                            height: 150,
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  'https://picsum.photos/300/150',
+                                ),
+                              ),
+                            ),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Stack(
+                                alignment: AlignmentDirectional.center,
+                                children: [
+                                  Container(
+                                    height: 35,
+                                    width: 35,
+                                    decoration: BoxDecoration(
+                                      color: Colors.amber,
+                                      borderRadius: BorderRadius.circular(
+                                        35 / 2,
+                                      ),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Icon(Icons.heart_broken),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('masuk sini'),
+                                  Row(
+                                    children: [
+                                      Text('Masuk sini'),
+                                      Text('Masuk sini'),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              )),
+            ),
           ],
         ),
       ),
