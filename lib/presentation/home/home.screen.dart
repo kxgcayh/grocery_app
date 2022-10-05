@@ -125,6 +125,8 @@ class HomeScreen extends GetView<HomeController> {
               ),
             ),
           ),
+          SizedBox(height: 20),
+          // Slider
           Container(
             color: Colors.green.withOpacity(0.2),
             child: Column(
@@ -153,11 +155,11 @@ class HomeScreen extends GetView<HomeController> {
                                   BorderRadius.all(Radius.circular(5.0)),
                               child: Stack(
                                 children: <Widget>[
-                                  Image.network(
-                                    item,
-                                    fit: BoxFit.fill,
-                                    width: 1000.0,
-                                  ),
+                                  // Image.network(
+                                  //   item,
+                                  //   fit: BoxFit.fill,
+                                  //   width: 1000.0,
+                                  // ),
                                   Positioned(
                                     bottom: 0.0,
                                     left: 0.0,
@@ -223,6 +225,49 @@ class HomeScreen extends GetView<HomeController> {
               ],
             ),
           ),
+          // Categories
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Categories'),
+                TextButton.icon(
+                  onPressed: () {},
+                  label: Icon(Icons.arrow_forward_ios_outlined),
+                  icon: Text('View All'),
+                ),
+              ],
+            ),
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+                children: xctrl.categories.map(
+              (cat) {
+                return Padding(
+                  padding: EdgeInsets.only(right: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 120,
+                        height: 130,
+                        decoration: BoxDecoration(
+                          color: Colors.greenAccent,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(child: Text('Image Here')),
+                      ),
+                      SizedBox(height: 6),
+                      Text(cat),
+                    ],
+                  ),
+                );
+              },
+            ).toList()),
+          )
+          // End of Categories
         ],
       ),
     );
