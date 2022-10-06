@@ -626,8 +626,79 @@ class HomeScreen extends GetView<HomeController> {
                   }).toList(),
                 )
               ],
-            )
+            ),
             // End Featured
+            //Trending
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Trending',
+                    style: TextStyle(fontWeight: FontWeight.w700),
+                  ),
+                  TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'See All',
+                        style: TextStyle(
+                          color: Colors.grey.shade500,
+                        ),
+                      ))
+                ],
+              ),
+            ),
+            SizedBox(height: 20),
+            SingleChildScrollView(
+              padding: EdgeInsets.all(10),
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                  children: xctrl.categories.map(
+                (cat) {
+                  return Padding(
+                    padding: EdgeInsets.only(right: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 120,
+                          height: 130,
+                          decoration: BoxDecoration(
+                            color: Colors.greenAccent,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Center(child: Text('Image Here')),
+                        ),
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: Container(
+                            margin: EdgeInsets.only(right: 10, top: 10),
+                            width: 30,
+                            height: 30,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30 / 2),
+                              color: Colors.blue,
+                            ),
+                            child: Center(
+                              child: Icon(
+                                Icons.heart_broken,
+                                size: 20,
+                                color: Colors.red,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 6),
+                        Text(cat),
+                      ],
+                    ),
+                  );
+                },
+              ).toList()),
+            ),
+
+            //End Trending
           ],
         ),
       ),
