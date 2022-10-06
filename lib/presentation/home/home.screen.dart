@@ -740,8 +740,6 @@ class HomeScreen extends GetView<HomeController> {
                                               onPressed: () {},
                                               child: Text('Detail'),
                                               style: ElevatedButton.styleFrom(
-                                                backgroundColor:
-                                                    Colors.transparent,
                                                 padding: EdgeInsets.symmetric(
                                                   horizontal: 20,
                                                   vertical: 15,
@@ -842,63 +840,114 @@ class HomeScreen extends GetView<HomeController> {
                     style: TextStyle(color: Colors.grey.shade500),
                   ),
                   SizedBox(height: 5),
-                  Row(
-                    children: [
-                      Stack(
-                        children: [
-                          Container(
-                            width: 300,
-                            height: 150,
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                  'https://picsum.photos/300/150',
-                                ),
+                  Container(
+                    width: double.infinity,
+                    height: 180,
+                    decoration: BoxDecoration(
+                      border: Border.all(),
+                      image: DecorationImage(
+                        image: NetworkImage('https://picsum.photos/800/300'),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Stack(
+                          alignment: AlignmentDirectional.center,
+                          children: [
+                            Container(
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                border: Border.all(),
+                                color: Colors.red,
                               ),
                             ),
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Stack(
-                                alignment: AlignmentDirectional.center,
-                                children: [
-                                  Container(
-                                    height: 35,
-                                    width: 35,
-                                    decoration: BoxDecoration(
-                                      color: Colors.amber,
-                                      borderRadius: BorderRadius.circular(
-                                        35 / 2,
-                                      ),
-                                    ),
-                                  ),
-                                  Center(
-                                    child: Icon(Icons.heart_broken),
-                                  ),
-                                ],
+                            Container(
+                              height: 25,
+                              width: 25,
+                              decoration: BoxDecoration(
+                                border: Border.all(),
+                                color: Colors.yellow,
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('masuk sini'),
-                                  Row(
-                                    children: [
-                                      Text('Masuk sini'),
-                                      Text('Masuk sini'),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ],
+                            )
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Text Atas'),
+                            Row(
+                              children: [
+                                Text('Text Bawak Kiri'),
+                                Text('Text Bawak Kanan'),
+                              ],
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
+                  SizedBox(height: 50),
+                  // Row(
+                  //   children: [
+                  //     Stack(
+                  //       children: [
+                  //         Container(
+                  //           width: 300,
+                  //           height: 150,
+                  //           decoration: BoxDecoration(
+                  //             color: Colors.red,
+                  //             borderRadius: BorderRadius.circular(10),
+                  //             image: DecorationImage(
+                  //               image: NetworkImage(
+                  //                 'https://picsum.photos/300/150',
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //         Column(
+                  //           crossAxisAlignment: CrossAxisAlignment.start,
+                  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //           children: [
+                  //             Stack(
+                  //               alignment: AlignmentDirectional.center,
+                  //               children: [
+                  //                 Container(
+                  //                   height: 35,
+                  //                   width: 35,
+                  //                   decoration: BoxDecoration(
+                  //                     color: Colors.amber,
+                  //                     borderRadius: BorderRadius.circular(
+                  //                       35 / 2,
+                  //                     ),
+                  //                   ),
+                  //                 ),
+                  //                 Center(
+                  //                   child: Icon(Icons.heart_broken),
+                  //                 ),
+                  //               ],
+                  //             ),
+                  //             Column(
+                  //               crossAxisAlignment: CrossAxisAlignment.start,
+                  //               children: [
+                  //                 Text('masuk sini'),
+                  //                 Row(
+                  //                   children: [
+                  //                     Text('Masuk sini'),
+                  //                     Text('Masuk sini'),
+                  //                   ],
+                  //                 ),
+                  //               ],
+                  //             ),
+                  //           ],
+                  //         )
+                  //       ],
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               )),
             ),
