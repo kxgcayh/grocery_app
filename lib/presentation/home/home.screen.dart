@@ -266,8 +266,13 @@ class HomeScreen extends GetView<HomeController> {
                           decoration: BoxDecoration(
                             color: Colors.greenAccent,
                             borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                'https://picsum.photos/120/130',
+                              ),
+                            ),
                           ),
-                          child: Center(child: Text('Image Here')),
+                          // child: Center(child: Text('Image Here')),
                         ),
                         SizedBox(height: 6),
                         Text(cat),
@@ -321,8 +326,9 @@ class HomeScreen extends GetView<HomeController> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Center(
-                              child: Text('Icons Here'),
-                            ),
+                                child: Icon(
+                              Icons.coffee,
+                            )),
                           ),
                           SizedBox(height: 6),
                           Center(child: Text(cat))
@@ -375,8 +381,17 @@ class HomeScreen extends GetView<HomeController> {
                   final data = xctrl.products[index];
                   return Container(
                     decoration: BoxDecoration(
-                        color: Colors.greenAccent,
-                        borderRadius: BorderRadius.circular(10)),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 7,
+                          offset: Offset(0, 1), // changes position of shadow
+                        ),
+                      ],
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -386,10 +401,15 @@ class HomeScreen extends GetView<HomeController> {
                               width: double.infinity,
                               height: 140,
                               decoration: BoxDecoration(
-                                color: Colors.red,
                                 borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(10),
                                   topLeft: Radius.circular(10),
+                                ),
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    'https://picsum.photos/140',
+                                  ),
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
@@ -401,7 +421,7 @@ class HomeScreen extends GetView<HomeController> {
                                 height: 30,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30 / 2),
-                                  color: Colors.blue,
+                                  color: Colors.white,
                                 ),
                                 child: Center(
                                   child: Icon(
@@ -538,7 +558,7 @@ class HomeScreen extends GetView<HomeController> {
                   ),
                 ),
                 Column(
-                  children: xctrl.Foods.map((element) {
+                  children: xctrl.Foods.map((data) {
                     return Padding(
                       padding: EdgeInsets.only(
                         left: 12,
@@ -551,7 +571,12 @@ class HomeScreen extends GetView<HomeController> {
                             height: 100,
                             width: 100,
                             decoration: BoxDecoration(
-                              color: Colors.greenAccent,
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  'https://picsum.photos/100/100',
+                                ),
+                              ),
                             ),
                           ),
                           Expanded(
@@ -571,17 +596,19 @@ class HomeScreen extends GetView<HomeController> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'Adodong Manok sa Gata',
+                                            data.title,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),
                                           Text(
-                                            'Main Dish',
+                                            data.subtitle,
                                             style: TextStyle(
-                                                color:
-                                                    Colors.lightBlue.shade900),
+                                              color: Colors.lightBlue.shade900,
+                                            ),
                                           ),
                                           Row(
                                             children: [
@@ -589,10 +616,11 @@ class HomeScreen extends GetView<HomeController> {
                                                 children: [
                                                   Icon(
                                                     Icons.circle,
-                                                    size: 15,
+                                                    size: 10,
                                                     color: Colors.grey.shade500,
                                                   ),
-                                                  Text('4.5 Min'),
+                                                  Text(
+                                                      "${data.estimate.toString()} min"),
                                                 ],
                                               ),
                                               SizedBox(width: 10),
@@ -600,10 +628,16 @@ class HomeScreen extends GetView<HomeController> {
                                                 children: [
                                                   Icon(
                                                     Icons.circle,
-                                                    size: 15,
+                                                    size: 10,
                                                     color: Colors.grey.shade500,
                                                   ),
-                                                  Text('No Reviews'),
+                                                  Text(
+                                                    data.review.toString() ==
+                                                            '0'
+                                                        ? 'No review'
+                                                        : data.review
+                                                            .toString(),
+                                                  ),
                                                 ],
                                               ),
                                             ],
@@ -845,109 +879,85 @@ class HomeScreen extends GetView<HomeController> {
                     height: 180,
                     decoration: BoxDecoration(
                       border: Border.all(),
+                      borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
                         image: NetworkImage('https://picsum.photos/800/300'),
                         fit: BoxFit.fill,
                       ),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Stack(
-                          alignment: AlignmentDirectional.center,
-                          children: [
-                            Container(
-                              height: 50,
-                              width: 50,
-                              decoration: BoxDecoration(
-                                border: Border.all(),
-                                color: Colors.red,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        top: 10,
+                        left: 10,
+                        bottom: 15,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Stack(
+                            alignment: AlignmentDirectional.center,
+                            children: [
+                              Container(
+                                height: 30,
+                                width: 30,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30 / 2),
+                                  color: Colors.white.withOpacity(0.5),
+                                ),
                               ),
-                            ),
-                            Container(
-                              height: 25,
-                              width: 25,
-                              decoration: BoxDecoration(
-                                border: Border.all(),
-                                color: Colors.yellow,
+                              Icon(
+                                Icons.heart_broken,
+                                size: 20,
+                                color: Colors.white,
                               ),
-                            )
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Text Atas'),
-                            Row(
-                              children: [
-                                Text('Text Bawak Kiri'),
-                                Text('Text Bawak Kanan'),
-                              ],
-                            )
-                          ],
-                        ),
-                      ],
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Walnut and Nuts',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Text Bawak Kiri',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 10),
+                                    child: Icon(
+                                      Icons.circle,
+                                      size: 5,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Text Bawak Kanan',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(height: 50),
-                  // Row(
-                  //   children: [
-                  //     Stack(
-                  //       children: [
-                  //         Container(
-                  //           width: 300,
-                  //           height: 150,
-                  //           decoration: BoxDecoration(
-                  //             color: Colors.red,
-                  //             borderRadius: BorderRadius.circular(10),
-                  //             image: DecorationImage(
-                  //               image: NetworkImage(
-                  //                 'https://picsum.photos/300/150',
-                  //               ),
-                  //             ),
-                  //           ),
-                  //         ),
-                  //         Column(
-                  //           crossAxisAlignment: CrossAxisAlignment.start,
-                  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //           children: [
-                  //             Stack(
-                  //               alignment: AlignmentDirectional.center,
-                  //               children: [
-                  //                 Container(
-                  //                   height: 35,
-                  //                   width: 35,
-                  //                   decoration: BoxDecoration(
-                  //                     color: Colors.amber,
-                  //                     borderRadius: BorderRadius.circular(
-                  //                       35 / 2,
-                  //                     ),
-                  //                   ),
-                  //                 ),
-                  //                 Center(
-                  //                   child: Icon(Icons.heart_broken),
-                  //                 ),
-                  //               ],
-                  //             ),
-                  //             Column(
-                  //               crossAxisAlignment: CrossAxisAlignment.start,
-                  //               children: [
-                  //                 Text('masuk sini'),
-                  //                 Row(
-                  //                   children: [
-                  //                     Text('Masuk sini'),
-                  //                     Text('Masuk sini'),
-                  //                   ],
-                  //                 ),
-                  //               ],
-                  //             ),
-                  //           ],
-                  //         )
-                  //       ],
-                  //     ),
-                  //   ],
-                  // ),
                 ],
               )),
             ),
