@@ -1016,12 +1016,13 @@ class HomeScreen extends GetView<HomeController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(cat),
-                            Text("Elegant"),
+                            Text(
+                              "Elegant",
+                            ),
                             Row(
                               children: [
                                 Text("100"),
-                                SizedBox(width: 20),
-                                Text("89.00")
+                                Text("89.00"),
                               ],
                             ),
                           ],
@@ -1118,23 +1119,20 @@ class HomeScreen extends GetView<HomeController> {
                                             color: Colors.white,
                                           ),
                                           SizedBox(width: 5),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                'Modern Apartement',
-                                                style: TextStyle(
-                                                  fontSize: 15,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                              SizedBox(width: 90),
-                                              Text(
-                                                "45.65K",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 15),
-                                              )
-                                            ],
+                                          Text(
+                                            'Modern Apartement',
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          Spacer(),
+                                          Text(
+                                            "45.65K",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 15,
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -1144,6 +1142,7 @@ class HomeScreen extends GetView<HomeController> {
                                             Icons.account_box_sharp,
                                             color: Colors.white,
                                           ),
+                                          SizedBox(width: 5),
                                           Text(
                                             'Text Bawak Kiri',
                                             style: TextStyle(
@@ -1151,14 +1150,14 @@ class HomeScreen extends GetView<HomeController> {
                                               color: Colors.white,
                                             ),
                                           ),
-                                          SizedBox(width: 130),
+                                          Spacer(),
                                           Text(
                                             "200 Only",
                                             style:
                                                 TextStyle(color: Colors.white),
-                                          )
+                                          ),
                                         ],
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ],
@@ -1173,71 +1172,44 @@ class HomeScreen extends GetView<HomeController> {
                             children: [
                               Row(
                                 children: [
-                                  CircleAvatar(),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text("Leonara Moachiaki"),
-                                      Text("Since 2022")
-                                    ],
-                                  ),
-                                  Container(
-                                    child: ElevatedButton(
-                                        onPressed: null,
-                                        child: Row(
+                                  Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Row(
+                                      children: [
+                                        CircleAvatar(),
+                                        SizedBox(width: 10),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
-                                            Icon(Icons.abc),
-                                            Text("Contact")
+                                            Text("Leonara Moachiaki"),
+                                            Text("Since 2022")
                                           ],
-                                        )),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(right: 10),
+                                child: Container(
+                                  child: ElevatedButton(
+                                      onPressed: () {},
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.amber,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.abc),
+                                          Text("Contact"),
+                                        ],
+                                      )),
+                                ),
                               ),
                             ],
                           ),
                         ),
-
-                        // Container(
-                        //   padding: EdgeInsets.all(20),
-                        //   color: Colors.grey,
-                        //   child: Row(
-                        //     children: [
-                        //       CircleAvatar(),
-                        //       Padding(
-                        //         padding: EdgeInsets.all(10),
-                        //         child: Column(
-                        //           crossAxisAlignment: CrossAxisAlignment.start,
-                        //           children: [
-                        //             Text("Leorora Moachiaki"),
-                        //             Text("Since 2022"),
-                        //           ],
-                        //         ),
-                        //       ),
-                        //       SizedBox(width: 31),
-                        //   Container(
-                        //     child: ElevatedButton(
-                        //       onPressed: null,
-                        //       style: ElevatedButton.styleFrom(
-                        //           primary: Colors.yellow),
-                        //       child: Row(
-                        //         children: [
-                        //           Icon(
-                        //             Icons.access_time_rounded,
-                        //             size: 10,
-                        //           ),
-                        //           Text(
-                        //             "Contact",
-                        //             style: TextStyle(
-                        //                 color: Colors.white, fontSize: 10),
-                        //           )
-                        //         ],
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ],
-                        //   ),
-                        // ),
                         SizedBox(height: 20),
                       ],
                     )),
