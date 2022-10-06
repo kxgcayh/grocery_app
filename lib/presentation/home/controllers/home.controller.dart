@@ -84,6 +84,15 @@ class HomeController extends GetxController {
     ),
   ].obs;
 
+  final List<Carousel2Model> slider = [
+    Carousel2Model(
+      imageUrl: 'https://picsum.photos/200/300',
+      title: 'Your monioure',
+      description:
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+    )
+  ];
+
   @override
   void onInit() {
     carouselController = CarouselController().obs;
@@ -134,4 +143,15 @@ class FoodModel {
   final String subtitle;
   final double estimate;
   final int review;
+}
+
+class Carousel2Model {
+  const Carousel2Model({
+    required this.imageUrl,
+    required this.title,
+    required this.description,
+  });
+  final String imageUrl;
+  final String title;
+  final String description;
 }

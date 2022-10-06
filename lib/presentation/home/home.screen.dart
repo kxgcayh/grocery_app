@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -156,11 +158,11 @@ class HomeScreen extends GetView<HomeController> {
                                     BorderRadius.all(Radius.circular(5.0)),
                                 child: Stack(
                                   children: <Widget>[
-                                    // Image.network(
-                                    //   item,
-                                    //   fit: BoxFit.fill,
-                                    //   width: 1000.0,
-                                    // ),
+                                    Image.network(
+                                      item,
+                                      fit: BoxFit.fill,
+                                      width: 1000.0,
+                                    ),
                                     Positioned(
                                       bottom: 0.0,
                                       left: 0.0,
@@ -264,8 +266,13 @@ class HomeScreen extends GetView<HomeController> {
                           decoration: BoxDecoration(
                             color: Colors.greenAccent,
                             borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                'https://picsum.photos/120/130',
+                              ),
+                            ),
                           ),
-                          child: Center(child: Text('Image Here')),
+                          // child: Center(child: Text('Image Here')),
                         ),
                         SizedBox(height: 6),
                         Text(cat),
@@ -319,8 +326,9 @@ class HomeScreen extends GetView<HomeController> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Center(
-                              child: Text('Icons Here'),
-                            ),
+                                child: Icon(
+                              Icons.coffee,
+                            )),
                           ),
                           SizedBox(height: 6),
                           Center(child: Text(cat))
@@ -373,8 +381,17 @@ class HomeScreen extends GetView<HomeController> {
                   final data = xctrl.products[index];
                   return Container(
                     decoration: BoxDecoration(
-                        color: Colors.greenAccent,
-                        borderRadius: BorderRadius.circular(10)),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 7,
+                          offset: Offset(0, 1), // changes position of shadow
+                        ),
+                      ],
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -384,10 +401,15 @@ class HomeScreen extends GetView<HomeController> {
                               width: double.infinity,
                               height: 140,
                               decoration: BoxDecoration(
-                                color: Colors.red,
                                 borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(10),
                                   topLeft: Radius.circular(10),
+                                ),
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    'https://picsum.photos/140',
+                                  ),
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
@@ -399,7 +421,7 @@ class HomeScreen extends GetView<HomeController> {
                                 height: 30,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30 / 2),
-                                  color: Colors.blue,
+                                  color: Colors.white,
                                 ),
                                 child: Center(
                                   child: Icon(
@@ -536,7 +558,7 @@ class HomeScreen extends GetView<HomeController> {
                   ),
                 ),
                 Column(
-                  children: xctrl.Foods.map((element) {
+                  children: xctrl.Foods.map((data) {
                     return Padding(
                       padding: EdgeInsets.only(
                         left: 12,
@@ -549,7 +571,12 @@ class HomeScreen extends GetView<HomeController> {
                             height: 100,
                             width: 100,
                             decoration: BoxDecoration(
-                              color: Colors.greenAccent,
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  'https://picsum.photos/100/100',
+                                ),
+                              ),
                             ),
                           ),
                           Expanded(
@@ -569,17 +596,19 @@ class HomeScreen extends GetView<HomeController> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'Adodong Manok sa Gata',
+                                            data.title,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),
                                           Text(
-                                            'Main Dish',
+                                            data.subtitle,
                                             style: TextStyle(
-                                                color:
-                                                    Colors.lightBlue.shade900),
+                                              color: Colors.lightBlue.shade900,
+                                            ),
                                           ),
                                           Row(
                                             children: [
@@ -587,10 +616,11 @@ class HomeScreen extends GetView<HomeController> {
                                                 children: [
                                                   Icon(
                                                     Icons.circle,
-                                                    size: 15,
+                                                    size: 10,
                                                     color: Colors.grey.shade500,
                                                   ),
-                                                  Text('4.5 Min'),
+                                                  Text(
+                                                      "${data.estimate.toString()} min"),
                                                 ],
                                               ),
                                               SizedBox(width: 10),
@@ -598,10 +628,16 @@ class HomeScreen extends GetView<HomeController> {
                                                 children: [
                                                   Icon(
                                                     Icons.circle,
-                                                    size: 15,
+                                                    size: 10,
                                                     color: Colors.grey.shade500,
                                                   ),
-                                                  Text('No Reviews'),
+                                                  Text(
+                                                    data.review.toString() ==
+                                                            '0'
+                                                        ? 'No review'
+                                                        : data.review
+                                                            .toString(),
+                                                  ),
                                                 ],
                                               ),
                                             ],
@@ -628,6 +664,301 @@ class HomeScreen extends GetView<HomeController> {
               ],
             ),
             // End Featured
+            SizedBox(height: 20),
+            // Slider
+            Container(
+              color: Colors.green.withOpacity(0.2),
+              child: Column(
+                children: [
+                  CarouselSlider(
+                    carouselController: xctrl.carouselController.value,
+                    options: CarouselOptions(
+                      onPageChanged: (index, reason) {
+                        // xctrl.carouselIndicatorController.value.jumpTo(
+                        //   index.toDouble(),
+                        // );
+                        // xctrl.carouselIndicatorController.value.jumpToPage(index);
+                      },
+                      aspectRatio: 2.0,
+                      enlargeCenterPage: true,
+                      scrollDirection: Axis.horizontal,
+                      autoPlay: true,
+                    ),
+                    items: controller.imgList
+                        .map(
+                          (item) => Container(
+                            // margin: EdgeInsets.all(5.0),
+                            // child: ClipRRect(
+                            //   borderRadius:
+                            //       BorderRadius.all(Radius.circular(5.0)),
+                            //   child: Stack(
+                            //     children: [
+                            //       Image.network(
+                            //         item,
+                            //         fit: BoxFit.fill,
+                            //         width: 1000.0,
+                            //       ),
+                            //       Positioned(
+                            //         bottom: 0.0,
+                            //         left: 0.0,
+                            //         right: 0.0,
+                            //         child: Container(
+                            //           decoration: BoxDecoration(
+                            //             gradient: LinearGradient(
+                            //               colors: [
+                            //                 Color.fromARGB(200, 0, 0, 0),
+                            //                 Color.fromARGB(0, 0, 0, 0)
+                            //               ],
+                            //               begin: Alignment.bottomCenter,
+                            //               end: Alignment.topCenter,
+                            //             ),
+                            //           ),
+                            //           padding: EdgeInsets.symmetric(
+                            //             vertical: 10.0,
+                            //             horizontal: 20.0,
+                            //           ),
+                            //           child: Text(
+                            //             'No. ${controller.imgList.indexOf(item)} image',
+                            //             style: TextStyle(
+                            //               color: Colors.white,
+                            //               fontSize: 20.0,
+                            //               fontWeight: FontWeight.bold,
+                            //             ),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
+                            decoration: BoxDecoration(
+                              border: Border.all(),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child:
+                                LayoutBuilder(builder: (context, constraints) {
+                              return Row(
+                                children: [
+                                  Container(
+                                    height: double.infinity,
+                                    width: constraints.maxWidth / 2,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        bottomLeft: Radius.circular(10),
+                                      ),
+                                      color: Colors.green,
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                        left: 30,
+                                        right: 20,
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text('Title'),
+                                          SizedBox(height: 10),
+                                          Text('Description'),
+                                          SizedBox(height: 10),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.white),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                            ),
+                                            child: ElevatedButton(
+                                              onPressed: () {},
+                                              child: Text('Detail'),
+                                              style: ElevatedButton.styleFrom(
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 20,
+                                                  vertical: 15,
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: Colors.blue,
+                                      borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(10),
+                                        bottomRight: Radius.circular(10),
+                                      ),
+                                    ),
+                                    width: constraints.maxWidth / 2,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(10),
+                                        bottomRight: Radius.circular(10),
+                                      ),
+                                      child: Image.network(
+                                        'https://picsum.photos/300/300',
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            }),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                  SmoothPageIndicator(
+                    controller: xctrl.carouselIndicatorController.value,
+                    count: xctrl.imgList.length,
+                    onDotClicked: (index) {
+                      print(index);
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        if (xctrl
+                            .carouselIndicatorController.value.hasClients) {
+                          // xctrl.carouselIndicatorController.value.jumpToPage(index);
+                          // xctrl.carouselIndicatorController.value.animateToPage(
+                          //   index,
+                          //   duration: Duration(milliseconds: 1),
+                          //   curve: Curves.easeInOut,
+                          // );
+                          xctrl.carouselIndicatorController.value.jumpTo(50.0);
+                        } else {
+                          print('failed');
+                        }
+                      });
+                    },
+                    effect: WormEffect(
+                      dotHeight: 16,
+                      dotWidth: 16,
+                      type: WormType.thin,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // End Slider
+
+            // Breakfast
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Container(
+                  child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Breakfast',
+                        style: TextStyle(fontWeight: FontWeight.w700),
+                      ),
+                      TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'View All',
+                          style: TextStyle(color: Colors.green.shade500),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    'Breakfast is widely acknowledged to be the most important meal of the day',
+                    style: TextStyle(color: Colors.grey.shade500),
+                  ),
+                  SizedBox(height: 5),
+                  Container(
+                    width: double.infinity,
+                    height: 180,
+                    decoration: BoxDecoration(
+                      border: Border.all(),
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                        image: NetworkImage('https://picsum.photos/800/300'),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        top: 10,
+                        left: 10,
+                        bottom: 15,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Stack(
+                            alignment: AlignmentDirectional.center,
+                            children: [
+                              Container(
+                                height: 30,
+                                width: 30,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30 / 2),
+                                  color: Colors.white.withOpacity(0.5),
+                                ),
+                              ),
+                              Icon(
+                                Icons.heart_broken,
+                                size: 20,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Walnut and Nuts',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Text Bawak Kiri',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 10),
+                                    child: Icon(
+                                      Icons.circle,
+                                      size: 5,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Text Bawak Kanan',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                ],
+              )),
+            ),
             //Trending
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
@@ -649,7 +980,7 @@ class HomeScreen extends GetView<HomeController> {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            // SizedBox(height: 10),
             SingleChildScrollView(
               padding: EdgeInsets.all(10),
               scrollDirection: Axis.horizontal,
@@ -661,44 +992,260 @@ class HomeScreen extends GetView<HomeController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          width: 120,
-                          height: 130,
-                          decoration: BoxDecoration(
-                            color: Colors.greenAccent,
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: Center(child: Text('Image Here')),
-                        ),
-                        Align(
-                          alignment: Alignment.topRight,
-                          child: Container(
-                            margin: EdgeInsets.only(right: 10, top: 10),
-                            width: 30,
-                            height: 30,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30 / 2),
-                              color: Colors.blue,
+                        Stack(
+                          children: [
+                            Container(
+                              width: 120,
+                              height: 130,
+                              decoration: BoxDecoration(
+                                color: Colors.greenAccent,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
                             ),
-                            child: Center(
+                            Container(
+                              margin: EdgeInsets.only(top: 10, left: 10),
                               child: Icon(
                                 Icons.heart_broken,
                                 size: 20,
                                 color: Colors.red,
                               ),
                             ),
-                          ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(cat),
+                            Text("Elegant"),
+                            Row(
+                              children: [
+                                Text("100"),
+                                SizedBox(width: 20),
+                                Text("89.00")
+                              ],
+                            ),
+                          ],
                         ),
                         SizedBox(height: 6),
-                        Text(cat),
                       ],
                     ),
                   );
                 },
               ).toList()),
             ),
-
             //End Trending
+
+            //Featured
+            Column(
+              children: [
+                Container(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Container(
+                        child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Featured',
+                              style: TextStyle(fontWeight: FontWeight.w700),
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'See All',
+                                style: TextStyle(color: Colors.green.shade500),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 5),
+                        Container(
+                          // color: Colors.red,
+                          child: Container(
+                            width: double.infinity,
+                            height: 180,
+                            decoration: BoxDecoration(
+                              border: Border.all(),
+                              // borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                    'https://picsum.photos/900/300'),
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                top: 10,
+                                right: 10,
+                                bottom: 15,
+                                left: 10,
+                              ),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Stack(
+                                    alignment: AlignmentDirectional.center,
+                                    children: [
+                                      Container(
+                                        height: 30,
+                                        width: 30,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(30 / 2),
+                                          color: Colors.transparent,
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.heart_broken,
+                                        size: 20,
+                                        color: Colors.white,
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.add_a_photo_sharp,
+                                            size: 20,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(width: 5),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                'Modern Apartement',
+                                                style: TextStyle(
+                                                  fontSize: 15,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                              SizedBox(width: 90),
+                                              Text(
+                                                "45.65K",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 15),
+                                              )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.account_box_sharp,
+                                            color: Colors.white,
+                                          ),
+                                          Text(
+                                            'Text Bawak Kiri',
+                                            style: TextStyle(
+                                              fontSize: 13,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          SizedBox(width: 130),
+                                          Text(
+                                            "200 Only",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          color: Colors.grey,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  CircleAvatar(),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text("Leonara Moachiaki"),
+                                      Text("Since 2022")
+                                    ],
+                                  ),
+                                  Container(
+                                    child: ElevatedButton(
+                                        onPressed: null,
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.abc),
+                                            Text("Contact")
+                                          ],
+                                        )),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        // Container(
+                        //   padding: EdgeInsets.all(20),
+                        //   color: Colors.grey,
+                        //   child: Row(
+                        //     children: [
+                        //       CircleAvatar(),
+                        //       Padding(
+                        //         padding: EdgeInsets.all(10),
+                        //         child: Column(
+                        //           crossAxisAlignment: CrossAxisAlignment.start,
+                        //           children: [
+                        //             Text("Leorora Moachiaki"),
+                        //             Text("Since 2022"),
+                        //           ],
+                        //         ),
+                        //       ),
+                        //       SizedBox(width: 31),
+                        //   Container(
+                        //     child: ElevatedButton(
+                        //       onPressed: null,
+                        //       style: ElevatedButton.styleFrom(
+                        //           primary: Colors.yellow),
+                        //       child: Row(
+                        //         children: [
+                        //           Icon(
+                        //             Icons.access_time_rounded,
+                        //             size: 10,
+                        //           ),
+                        //           Text(
+                        //             "Contact",
+                        //             style: TextStyle(
+                        //                 color: Colors.white, fontSize: 10),
+                        //           )
+                        //         ],
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ],
+                        //   ),
+                        // ),
+                        SizedBox(height: 20),
+                      ],
+                    )),
+                  ),
+                ),
+              ],
+            ),
+            //End Featured
           ],
         ),
       ),
