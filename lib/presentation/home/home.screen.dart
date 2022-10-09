@@ -131,7 +131,7 @@ class HomeScreen extends GetView<HomeController> {
             SizedBox(height: 20),
             // Slider
             Container(
-              color: Colors.green.withOpacity(0.2),
+              // color: Colors.green.withOpacity(0.2),
               child: Column(
                 children: [
                   CarouselSlider(
@@ -200,6 +200,9 @@ class HomeScreen extends GetView<HomeController> {
                         )
                         .toList(),
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   SmoothPageIndicator(
                     controller: xctrl.carouselIndicatorController.value,
                     count: xctrl.imgList.length,
@@ -221,8 +224,8 @@ class HomeScreen extends GetView<HomeController> {
                       });
                     },
                     effect: WormEffect(
-                      dotHeight: 16,
-                      dotWidth: 16,
+                      dotHeight: 5,
+                      dotWidth: 5,
                       type: WormType.thin,
                     ),
                   ),
@@ -231,56 +234,68 @@ class HomeScreen extends GetView<HomeController> {
             ),
             // Categories
             SizedBox(
-              height: 20,
+              height: 15,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'Categories',
-                    style: TextStyle(fontWeight: FontWeight.w700),
+                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
                   ),
                   TextButton.icon(
                     onPressed: () {},
-                    label: Icon(Icons.arrow_forward_ios_outlined),
-                    icon: Text('View All'),
+                    label: Icon(
+                      Icons.arrow_forward_ios_outlined,
+                      color: Color.fromARGB(255, 68, 184, 142),
+                      size: 13,
+                    ),
+                    icon: Text(
+                      'View All',
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 68, 184, 142),
+                          fontSize: 13),
+                    ),
                   ),
                 ],
               ),
             ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                  children: xctrl.categories.map(
-                (cat) {
-                  return Padding(
-                    padding: EdgeInsets.only(right: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 120,
-                          height: 130,
-                          decoration: BoxDecoration(
-                            color: Colors.greenAccent,
-                            borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                'https://picsum.photos/120/130',
+            Container(
+              padding: EdgeInsets.all(12.0),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                    children: xctrl.categories.map(
+                  (cat) {
+                    return Padding(
+                      padding: EdgeInsets.only(right: 13),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 120,
+                            height: 130,
+                            decoration: BoxDecoration(
+                              color: Colors.greenAccent,
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  'https://picsum.photos/120/130',
+                                ),
                               ),
                             ),
+                            // child: Center(child: Text('Image Here')),
                           ),
-                          // child: Center(child: Text('Image Here')),
-                        ),
-                        SizedBox(height: 6),
-                        Text(cat),
-                      ],
-                    ),
-                  );
-                },
-              ).toList()),
+                          SizedBox(height: 6),
+                          Text(cat),
+                        ],
+                      ),
+                    );
+                  },
+                ).toList()),
+              ),
             ),
             // End of Categories
             SizedBox(
@@ -308,38 +323,41 @@ class HomeScreen extends GetView<HomeController> {
             ),
             SizedBox(height: 20),
 
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: xctrl.category.map(
-                  (cat) {
-                    return Padding(
-                      padding: EdgeInsets.only(right: 10),
-                      child: Column(
-                        // crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: 80,
-                            height: 80,
-                            decoration: BoxDecoration(
-                              color: Colors.greenAccent,
-                              borderRadius: BorderRadius.circular(10),
+            Container(
+              padding: EdgeInsets.all(12.0),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: xctrl.category.map(
+                    (cat) {
+                      return Padding(
+                        padding: EdgeInsets.only(right: 10),
+                        child: Column(
+                          // crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 80,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                color: Colors.greenAccent,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                  child: Icon(
+                                Icons.coffee,
+                              )),
                             ),
-                            child: Center(
-                                child: Icon(
-                              Icons.coffee,
-                            )),
-                          ),
-                          SizedBox(height: 6),
-                          Center(child: Text(cat))
-                        ],
-                      ),
-                    );
-                  },
-                ).toList(),
+                            SizedBox(height: 6),
+                            Center(child: Text(cat))
+                          ],
+                        ),
+                      );
+                    },
+                  ).toList(),
+                ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             // End categories
 
             // Best Seller
@@ -349,24 +367,26 @@ class HomeScreen extends GetView<HomeController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Best Seller Product',
-                    style: TextStyle(fontWeight: FontWeight.w700),
+                    'Best Seller Products',
+                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: 17),
                   ),
                   TextButton(
                       onPressed: () {},
                       child: Text(
                         'See All',
                         style: TextStyle(
-                          color: Colors.grey.shade500,
+                          // color: Colors.grey.shade500,
+                          color: Colors.black,
+                          fontSize: 13,
                         ),
                       ))
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            // SizedBox(height: 5),
 
             Container(
-              padding: EdgeInsets.all(12.0),
+              padding: EdgeInsets.all(8.0),
               child: GridView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
@@ -437,7 +457,8 @@ class HomeScreen extends GetView<HomeController> {
                           ],
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -449,7 +470,8 @@ class HomeScreen extends GetView<HomeController> {
                                     children: [
                                       Icon(
                                         Icons.location_on,
-                                        size: 12,
+                                        size: 14,
+                                        color: Colors.red,
                                       ),
                                       Text(
                                         data.location,
@@ -474,6 +496,7 @@ class HomeScreen extends GetView<HomeController> {
                                             Icon(
                                               Icons.star,
                                               size: 12,
+                                              color: Colors.amber,
                                             ),
                                             Text(
                                               '${data.rating}',
@@ -544,7 +567,8 @@ class HomeScreen extends GetView<HomeController> {
                     children: [
                       Text(
                         'Featured',
-                        style: TextStyle(fontWeight: FontWeight.w700),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700, fontSize: 20),
                       ),
                       TextButton(
                           onPressed: () {},
@@ -619,6 +643,9 @@ class HomeScreen extends GetView<HomeController> {
                                                     size: 10,
                                                     color: Colors.grey.shade500,
                                                   ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
                                                   Text(
                                                       "${data.estimate.toString()} min"),
                                                 ],
@@ -630,6 +657,9 @@ class HomeScreen extends GetView<HomeController> {
                                                     Icons.circle,
                                                     size: 10,
                                                     color: Colors.grey.shade500,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
                                                   ),
                                                   Text(
                                                     data.review.toString() ==
@@ -649,8 +679,10 @@ class HomeScreen extends GetView<HomeController> {
                                   Padding(
                                     padding:
                                         EdgeInsets.symmetric(horizontal: 10),
-                                    child:
-                                        Icon(Icons.arrow_forward_ios_outlined),
+                                    child: Icon(
+                                      Icons.arrow_forward_ios_outlined,
+                                      size: 15,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -667,7 +699,7 @@ class HomeScreen extends GetView<HomeController> {
             SizedBox(height: 20),
             // Slider
             Container(
-              color: Colors.green.withOpacity(0.2),
+              // color: Colors.green.withOpacity(0.2),
               child: Column(
                 children: [
                   CarouselSlider(
@@ -813,6 +845,9 @@ class HomeScreen extends GetView<HomeController> {
                         )
                         .toList(),
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   SmoothPageIndicator(
                     controller: xctrl.carouselIndicatorController.value,
                     count: xctrl.imgList.length,
@@ -834,8 +869,8 @@ class HomeScreen extends GetView<HomeController> {
                       });
                     },
                     effect: WormEffect(
-                      dotHeight: 16,
-                      dotWidth: 16,
+                      dotHeight: 10,
+                      dotWidth: 10,
                       type: WormType.thin,
                     ),
                   ),
@@ -961,13 +996,13 @@ class HomeScreen extends GetView<HomeController> {
             ),
             //Trending
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'Trending',
-                    style: TextStyle(fontWeight: FontWeight.w700),
+                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
                   ),
                   TextButton(
                       onPressed: () {},
@@ -1022,7 +1057,7 @@ class HomeScreen extends GetView<HomeController> {
                             Row(
                               children: [
                                 Text("100"),
-                                Text("89.00"),
+                                Text("\$89.00"),
                               ],
                             ),
                           ],
