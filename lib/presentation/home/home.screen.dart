@@ -498,6 +498,9 @@ class HomeScreen extends GetView<HomeController> {
                                               size: 12,
                                               color: Colors.amber,
                                             ),
+                                            SizedBox(
+                                              width: 3,
+                                            ),
                                             Text(
                                               '${data.rating}',
                                               style: TextStyle(
@@ -540,7 +543,7 @@ class HomeScreen extends GetView<HomeController> {
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: Icon(Icons.shopping_cart_checkout),
-                                  )
+                                  ),
                                 ],
                               ),
                             ],
