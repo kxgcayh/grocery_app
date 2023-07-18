@@ -367,7 +367,7 @@ class HomeScreen extends GetView<HomeController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Best Seller Products',
+                    'Best Seller Product',
                     style: TextStyle(fontWeight: FontWeight.w700, fontSize: 17),
                   ),
                   TextButton(
@@ -375,8 +375,8 @@ class HomeScreen extends GetView<HomeController> {
                       child: Text(
                         'See All',
                         style: TextStyle(
-                          // color: Colors.grey.shade500,
-                          color: Colors.black,
+                          color: Colors.grey.shade500,
+                          //color: Colors.black,
                           fontSize: 13,
                         ),
                       ))
@@ -386,16 +386,16 @@ class HomeScreen extends GetView<HomeController> {
             // SizedBox(height: 5),
 
             Container(
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(3.9),
               child: GridView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: xctrl.products.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 4.0,
-                  mainAxisSpacing: 4.0,
-                  childAspectRatio: 0.75,
+                  crossAxisSpacing: 9.0,
+                  mainAxisSpacing: 9.0,
+                  childAspectRatio: 0.70,
                 ),
                 itemBuilder: (BuildContext context, int index) {
                   final data = xctrl.products[index];
@@ -470,7 +470,7 @@ class HomeScreen extends GetView<HomeController> {
                                     children: [
                                       Icon(
                                         Icons.location_on,
-                                        size: 14,
+                                        size: 15,
                                         color: Colors.red,
                                       ),
                                       Text(
@@ -536,13 +536,14 @@ class HomeScreen extends GetView<HomeController> {
                                     ],
                                   ),
                                   Container(
-                                    width: 50,
-                                    height: 50,
+                                    width: 35,
+                                    height: 35,
                                     decoration: BoxDecoration(
-                                      color: Colors.lightGreen,
+                                      color: const Color.fromARGB(
+                                          255, 11, 221, 120),
                                       borderRadius: BorderRadius.circular(10),
                                     ),
-                                    child: Icon(Icons.shopping_cart_checkout),
+                                    child: Icon(Icons.add_shopping_cart),
                                   ),
                                 ],
                               ),

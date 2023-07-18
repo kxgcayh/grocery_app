@@ -29,14 +29,14 @@ class HomeController extends GetxController {
       price: '150.000',
       sold: 0,
       rating: 4.5,
-      location: 'Indonesia, Jawa Barat',
+      location: 'Jawa Barat, Indonesia',
       whitelist: true,
     ),
     ProductModel(
       name: 'Denim Jeans Premium',
       price: '150.000',
       sold: 128,
-      location: 'Indonesia, Jawa Barat',
+      location: 'Jawa Barat, Indonesia',
       whitelist: false,
     ),
     ProductModel(
@@ -44,7 +44,7 @@ class HomeController extends GetxController {
       price: '150.000',
       sold: 0,
       rating: 4.5,
-      location: 'Indonesia, Jawa Barat',
+      location: 'Jawa Barat, Indonesia',
       whitelist: false,
     ),
     ProductModel(
@@ -52,7 +52,7 @@ class HomeController extends GetxController {
       price: '150.000',
       sold: 0,
       rating: 4.5,
-      location: 'Indonesia, Jawa Barat',
+      location: 'Jawa Barat, Indonesia',
       whitelist: true,
     ),
   ].obs;
